@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const Item = mongoose.model('Item', {
+    _id:Number,
     name:String,
     unit:String,
     price:Number,

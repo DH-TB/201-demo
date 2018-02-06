@@ -12,7 +12,7 @@ module.exports = {
     },
     getOne: (req, res, next) => {
         const id = req.params.id;
-        Item.findOne({id: id}, (err, data) => {
+        Item.findOne({_id: id}, (err, data) => {
             if (err)
                 return next(err);
             if (data) {
@@ -26,29 +26,29 @@ module.exports = {
             if (err)
                 return next(err);
             if (data) {
-                res.send(data)
+                res.sendStatus(201)
             }
         })
     },
     deleteItem: (req, res, next) => {
         const id = req.params.id;
-        Item.findOneAndRemove({id: id}, (err, data) => {
+        Item.findOneAndRemove({_id: id}, (err, data) => {
             if (err)
                 return next(err);
             if (data) {
-                res.send(data)
+                res.sendStatus(204)
             }
         })
     },
     updateItem: (req, res, next) => {
         const id = req.params.id;
-        Item.findOneAndUpdate({id: id}, {
-            //要更新的内容
+        Item.findOneAndUpdate({_id: id}, {
+            name: req.body.name
         }, (err, data) => {
             if (err)
                 return next(err);
             if (data) {
-                res.send(data)
+                res.sendStatus(204)
             }
         })
     },
