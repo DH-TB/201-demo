@@ -1,7 +1,8 @@
 import mongoose from 'mongoose';
 
 const Category = mongoose.model('Category', {
-    name:String,
+    id: Number,
+    name: String,
 });
 
 module.exports = Category;

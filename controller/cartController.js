@@ -1,12 +1,10 @@
-import Item from '../server/models/Item';
-import Category from '../server/models/Category';
+import Cart from '../server/models/Cart';
 import "../server/models/Category";
 import * as result from './common';
 
-
 module.exports = {
     getAll: (req, res, next) => {
-        Item.find({}).populate('category').exec((err, data) => {
+        Cart.find({}).populate('category').exec((err, data) => {
             if (err){
                 return next(err);
             }
@@ -15,7 +13,7 @@ module.exports = {
     },
     getOne: (req, res, next) => {
         const id = req.params.id;
-        Item.findOne({id: id}).populate('category').exec((err, data) => {
+        Cart.findOne({id: id}).populate('category').exec((err, data) => {
             if (err){
                 return next(err);
             }
@@ -23,10 +21,10 @@ module.exports = {
         })
     },
 
-    //TODo
-    addItem: (req, res, next) => {
-        const item = new Item(req.body);
-        item.save((err, data) => {
+    //TODO
+    addCart: (req, res, next) => {
+        const cart = new Cart(req.body);
+        cart.save((err, data) => {
             if (err)
                 return next(err);
             if (data) {
@@ -35,18 +33,18 @@ module.exports = {
         })
     },
 
-    deleteItem: (req, res, next) => {
+    deleteCart: (req, res, next) => {
         const id = req.params.id;
-        Item.findOneAndRemove({id: id}, (err, data) => {
+        Cart.findOneAndRemove({id: id}, (err, data) => {
             if (err){
                 return next(err);
             }
             result.handleNotFoundAndNoContent(res, data)
         })
     },
-    updateItem: (req, res, next) => {
+    updateCart: (req, res, next) => {
         const id = req.params.id;
-        Item.findOneAndUpdate({id: id}, {
+        Cart.findOneAndUpdate({id: id}, {
             name: req.body.name
         }, (err, data) => {
             if (err){
